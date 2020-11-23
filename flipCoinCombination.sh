@@ -28,3 +28,32 @@ fi
         echo "Head: ${combinationDictionary[0]} Tail: ${singletDictionary[1]}"
 
 
+function Doublet()
+{
+num=$1
+        for ((counter=1; counter <= $num; counter++))
+        do
+                flip=$((RANDOM%4))
+                combinationDictionary[$flip]=$((${combinationDictionary[$flip]} +1))
+        done
+        SingHHProb=$(( (${combinationDictionary[0]}*100) / $num ))
+        SingTTProb=$(( (${combinationDictionary[1]}*100) / $num ))
+        SingHTProb=$(( (${combinationDictionary[2]}*100) / $num ))
+        SingTHProb=$(( (${combinationDictionary[3]}*100) / $num ))
+
+
+        if (( $SingHHProb >= $SingTTProb && $SingHHProb >= $SingTHProb && $SingHHProb >= $SingHTProb ))
+        then
+                echo "$SingHHProb %"
+        elif (( $SingTTProb >= $SingHHProb && $SingTTProb >= $SingTHProb && $SingTTProb >= $SingHTProb ))
+        then
+                echo "TT = $SingTTProb %"
+        elif (( $SingTHProb >= $SingTTProb && $SingTHProb >= $SingHHProb && $SingTHProb >= $SingHTProb ))
+        then
+                echo "TH = $SignTHProb %"
+        else
+                echo "HT = $SignHTProb %"
+
+        fi
+
+        echo "HH: ${combinationDictionary[0]} TT: ${combinationDictionary[1]}  HT : ${combinationDictionary[2]}   TH : ${combinationDictionary[3]}"
