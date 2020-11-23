@@ -26,7 +26,8 @@ else
 fi
 
         echo "Head: ${combinationDictionary[0]} Tail: ${singletDictionary[1]}"
-
+sortedDict=($(echo ${combinationDictionary[@]} | tr " " "\n" | sort -n))
+echo "In Sorted Order : ${sortedDict[@]}
 
 function Doublet()
 {
@@ -57,6 +58,10 @@ num=$1
         fi
 
         echo "HH: ${combinationDictionary[0]} TT: ${combinationDictionary[1]}  HT : ${combinationDictionary[2]}   TH : ${combinationDictionary[3]}"
+sortedDict=($(echo ${combinationDictionary[@]} | tr " " "\n" | sort -n))
+echo "In Sorted Order : ${sortedDict[@]}"
+
+
 function Triplet()
 {
 num=$1
@@ -101,3 +106,24 @@ num=$1
                 echo "HTH = $HTH %"
 
         fi
+sortedDict=($(echo ${combinationDictionary[@]} | tr " " "\n" | sort -n))
+echo "In Sorted Order : ${sortedDict[@]}"
+
+
+}
+
+read -p "Enter the times of flip " num
+read -p "Select the option: " option
+
+case "$option" in
+1)
+
+        singlet $num
+        ;;
+2)
+        Doublet $num
+        ;;
+*)
+        echo "0"
+        ;;
+esac
